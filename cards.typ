@@ -1,7 +1,7 @@
 #set page(paper: "a4", margin: (x: 0.65cm, y: 0.65cm))
 #set text(font: "Roboto")
 
-#let card(name, description, icon, footer, padding, description_) = {
+#let card(name, description, icon, footer, padding, description_, offset) = {
   box(
     box(
       [#if padding == true { [\ ] }
@@ -22,9 +22,8 @@
         #if description != "" {
           box(text(description, size: description_.size, font: description_.font))
         }
-
         #if footer != "" {
-          box(text(footer, size: 7pt))
+          box(text(footer, size: 6.5pt))
         }],
       stroke: (paint: black, thickness: 1pt, dash: "loosely-dash-dotted"),
       inset: 0.2em,
@@ -36,11 +35,11 @@
     radius: 2em,
     clip: true,
     height: 5.5cm,
-    width: 3.7cm,
+    width: 3.7cm + offset,
   )
 }
 
-#let gridOfCards(card_data, columns: 5, rows: 14.63em, c_f: card) = {
+#let gridOfCards(card_data, columns: 5, rows: 14.63em, c_f: card, offset: 0cm) = {
   let cards = ()
   for card in card_data.at("cards") {
     for i in range(card.at("count", default: 1)) {
@@ -70,6 +69,7 @@
               size: 11pt,
               font: "Roboto",
             )),
+            offset,
           ),
           inset: 0.2em,
         )
