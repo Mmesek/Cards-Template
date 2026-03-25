@@ -39,7 +39,7 @@
   )
 }
 
-#let gridOfCards(card_data, columns: 5, rows: 14.63em, c_f: card, offset: 0cm) = {
+#let gridOfCards(card_data, columns: 5, rows: 14.63em, c_f: card, offset: 0cm, ..args) = {
   let cards = ()
   for card in card_data.at("cards") {
     for i in range(card.at("count", default: 1)) {
@@ -77,6 +77,7 @@
     ),
     stroke: (paint: silver, thickness: 1pt, dash: "dashed"),
     align: center,
+    ..args
   )
 }
 
